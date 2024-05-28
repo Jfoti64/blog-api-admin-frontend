@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const CommentEditForm = ({ comment, setEditing, setComment, postId }) => {
   const [commentText, setCommentText] = useState(comment.comment_text);
 
   const handleSave = async () => {
     try {
-      const response = await axios.put(`http://localhost:3000/posts/${postId}/comments/${comment._id}`, {
+      const response = await axios.put(`${API_BASE_URL}/posts/${postId}/comments/${comment._id}`, {
         comment_text: commentText,
       }, {
         headers: {

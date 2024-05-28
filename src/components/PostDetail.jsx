@@ -5,6 +5,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Comment from './Comment';
 import PostEditForm from './PostEditForm';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const PostDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate(); // useNavigate hook for navigation
@@ -14,7 +16,7 @@ const PostDetail = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/posts/${id}`, {
+        const response = await axios.get(`${API_BASE_URL}/posts/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
@@ -38,7 +40,7 @@ const PostDetail = () => {
   const handleChangePublish = async () => {
     try {
       await axios.put(
-        `http://localhost:3000/posts/${post._id}`,
+        `${API_BASE_URL}/posts/${post._id}`,
         { published: !post.published },
         {
           headers: {
@@ -47,7 +49,7 @@ const PostDetail = () => {
         }
       );
       // Fetch the full post data again after updating the publish status
-      const response = await axios.get(`http://localhost:3000/posts/${id}`, {
+      const response = await axios.get(`${API_BASE_URL}/posts/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -61,7 +63,7 @@ const PostDetail = () => {
   const handlePostDelete = async () => {
     try {
       await axios.delete(
-        `http://localhost:3000/posts/${post._id}`,
+        `${API_BASE_URL}/posts/${post._id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,

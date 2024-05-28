@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const CreatePost = () => {
   const { auth } = useContext(AuthContext);
   const [title, setTitle] = useState('');
@@ -20,7 +22,7 @@ const CreatePost = () => {
 
     try {
       await axios.post(
-        'http://localhost:3000/posts',
+        `${API_BASE_URL}/posts`,
         { title, post_text: postText, user: auth.user._id }, // Include user ID in the request
         {
           headers: {

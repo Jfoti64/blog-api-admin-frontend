@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
@@ -8,7 +10,7 @@ const Posts = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/posts', {
+        const response = await axios.get(`${API_BASE_URL}/posts`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },

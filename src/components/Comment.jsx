@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import CommentEditForm from './CommentEditForm';
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Comment = ({ comment, postId, onDelete }) => {
   const [editing, setEditing] = useState(false);
   const [currentComment, setCurrentComment] = useState(comment);
@@ -10,7 +12,7 @@ const Comment = ({ comment, postId, onDelete }) => {
   const handleCommentDelete = async (commentId) => {
     try {
       await axios.delete(
-        `http://localhost:3000/posts/${postId}/comments/${commentId}`,
+        `${API_BASE_URL}/posts/${postId}/comments/${commentId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,

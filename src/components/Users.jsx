@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Users = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/users', {
+        const response = await axios.get(`${API_BASE_URL}/users`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
@@ -23,7 +25,7 @@ const Users = () => {
   const handleDelete = async (userId) => {
     try {
       await axios.delete(
-        `http://localhost:3000/users/${userId}`,
+        `${API_BASE_URL}/users/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,

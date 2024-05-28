@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const PostEditForm = ({ post, setEditing, setPost }) => {
   const [title, setTitle] = useState(post.title);
   const [postText, setPostText] = useState(post.post_text);
@@ -10,7 +12,7 @@ const PostEditForm = ({ post, setEditing, setPost }) => {
   const handleSave = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3000/posts/${post._id}`,
+        `${API_BASE_URL}/posts/${post._id}`,
         {
           title,
           post_text: postText,
