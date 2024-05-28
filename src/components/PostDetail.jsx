@@ -1,5 +1,5 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useEffect, useState } from 'react';
+// src/components/PostDetail.jsx
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import Comment from './Comment';
@@ -9,7 +9,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const PostDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate(); // useNavigate hook for navigation
+  const navigate = useNavigate();
   const [post, setPost] = useState(null);
   const [editing, setEditing] = useState(false);
 
@@ -48,7 +48,6 @@ const PostDetail = () => {
           },
         }
       );
-      // Fetch the full post data again after updating the publish status
       const response = await axios.get(`${API_BASE_URL}/posts/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -70,7 +69,6 @@ const PostDetail = () => {
           },
         }
       );
-      // Navigate back to the posts list or another route after deleting
       navigate('/posts');
     } catch (error) {
       console.error('Error deleting post:', error);
